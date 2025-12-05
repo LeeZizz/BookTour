@@ -61,13 +61,13 @@ public class UserController {
 //    }
 
 	@GetMapping("/myInfor")
-	ApiResponse<UserResponse> getMyInfor() {
+	ApiResponse<UserResponse> getMyInfo() {
 		ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
-		apiResponse.setResult(userService.getMyInfor());
+		apiResponse.setResult(userService.getMyInfo());
 		return apiResponse;
 	}
-//    UserResponse getMyInfor(){
-//        return userService.getMyInfor();
+//    UserResponse getMyInfo(){
+//        return userService.getMyInfo();
 //    }
 
 	@PutMapping("/update/{id}")
