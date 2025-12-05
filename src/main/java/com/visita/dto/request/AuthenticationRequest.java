@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class AuthenticationRequest {
-
-	private String userName;
-	private String passWord;
+    
+    private String email;    // Used for Customers
+    private String username; // Used for Admins
+	private String password;
 }

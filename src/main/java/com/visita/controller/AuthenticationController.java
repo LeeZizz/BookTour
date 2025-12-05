@@ -2,7 +2,6 @@ package com.visita.controller;
 
 import java.text.ParseException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +19,11 @@ import com.visita.services.AuthenticationService;
 @RequestMapping("/auth")
 public class AuthenticationController {
 
-	@Autowired
-	private AuthenticationService authenticationService;
+	private final AuthenticationService authenticationService;
+
+	public AuthenticationController(AuthenticationService authenticationService) {
+		this.authenticationService = authenticationService;
+	}
 
 	@PostMapping("/login")
 	ApiResponse<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
@@ -30,9 +32,9 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/introspect")
-	ApiResponse<IntrospectResponse> authenticate(@RequestBody IntrospectRequest introSpectRequest)
+	ApiResponse<IntrospectResponse> introspect(@RequestBody IntrospectRequest introspectRequest)
 			throws ParseException, JOSEException {
-		var isAuthenticated = authenticationService.introspect(introSpectRequest);
+		var isAuthenticated = authenticationService.introspect(introspectRequest);
 		return ApiResponse.<IntrospectResponse>builder().result(isAuthenticated).build();
 	}
 }
